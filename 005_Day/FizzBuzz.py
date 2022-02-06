@@ -7,3 +7,6 @@ for n in range(1,100):
         print("Fizz")
     else:
         print(n)
+
+
+def asdas():
