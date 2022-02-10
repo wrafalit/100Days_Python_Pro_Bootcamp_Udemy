@@ -1,4 +1,3 @@
-
 def add(n1, n2):
     return n1 + n2
 
@@ -32,9 +31,12 @@ while not calc_off:
     while not calc_off:
         y_n = input(f"Type 'y' to continue calculation with {firs_answer}, or type 'n' to exit.:  ")
         if y_n == 'n':
-            calc_func = True
+            calc_off = True
+            break
         symbol = input("Pick an operation from the line above: ")
+        calc_func = operat[symbol]
         num3 = int(input("What is your next number?: "))
-        sec_answer = calc_func(calc_func(num1,num2),num3)
+        sec_answer = calc_func(firs_answer,num3)
 
         print(f"{firs_answer} {symbol} {num3} = {sec_answer}")
+        firs_answer = sec_answer
