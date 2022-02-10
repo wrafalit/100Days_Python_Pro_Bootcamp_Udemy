@@ -16,27 +16,25 @@ operat = {
     "*": mul,
     "/": div,
 }
-calc_off = False
 
-while not calc_off:
-    num1 = int(input("What is your first number?: "))
-
+def calculator():
+    calc_off = False
+    num1 = float(input("What is your first number?: "))
     for key in operat.keys():
         print(key)
-    symbol = input("Pick an operation from the line above: ")
-    num2 = int(input("What is your second number?: "))
-    calc_func = operat[symbol]
-    firs_answer = calc_func(num1,num2)
-    print(f"{num1} {symbol} {num2} = {firs_answer}")
+
     while not calc_off:
-        y_n = input(f"Type 'y' to continue calculation with {firs_answer}, or type 'n' to exit.:  ")
+        symbol = input("Pick an operation from the line above: ")
+        num2 = float(input("What is your next number?: "))
+        calc_func = operat[symbol]
+        answer = calc_func(num1,num2)
+        print(f"{num1} {symbol} {num2} = {answer}")
+        y_n = input(f"Type 'y' to continue calculation with {answer}, or type 'n' to start a new calculation: ")
         if y_n == 'n':
             calc_off = True
-            break
-        symbol = input("Pick an operation from the line above: ")
-        calc_func = operat[symbol]
-        num3 = int(input("What is your next number?: "))
-        sec_answer = calc_func(firs_answer,num3)
+            calculator()
+        else:
+            num1 = answer
 
-        print(f"{firs_answer} {symbol} {num3} = {sec_answer}")
-        firs_answer = sec_answer
+
+calculator()
