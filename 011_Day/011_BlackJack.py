@@ -14,7 +14,7 @@ def game():
             user_card_value = sum(user_card)
             comp_card_value = sum(comp_card)
             print(user_card,user_card_value," User" )
-            print(comp_card[0],['?']," Comp")
+            print(comp_card[0],'       '," Comp")
             
             if user_card_value == 21:
                 print("User WIN")
