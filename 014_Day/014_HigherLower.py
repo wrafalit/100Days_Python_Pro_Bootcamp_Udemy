@@ -1,19 +1,20 @@
 import random
 from HigerLower.game_data import data
+from HigerLower.art import vs
 
 def compare(q1,q2):
     print("Compare A: " + q1['name'] + " a " + q1['description'] + ", from " + q1['country'] +"." )
-    print(q1['follower_count'] , " VS " ,q2['follower_count'])
-    print("Compare B: " + q2['name'] + " a " + q2['description'] + ", from " + q2['country'] + ".")
+    print(vs)
+    print("Against B: " + q2['name'] + " a " + q2['description'] + ", from " + q2['country'] + ".")
 
 def check(q1,q2):
-    answer = input("Who has more followers? Type 'A' or 'B': ")
+    answer = input("Who has more followers? Type 'A' or 'B': ").lower()
     global score
     global questions
     more_f = ''
-    if answer == "A" or answer == "a":
+    if answer == "a":
         answer = 'q1'
-    elif answer == "B" or answer == "b":
+    elif answer == "b":
         answer = 'q2'
     if (q1['follower_count'] > q2['follower_count']):
         more_f = 'q1'
@@ -45,5 +46,7 @@ while not game_off:
     game_off = check(questions[0],questions[1])
     print("\n" * 10)
     questions.append(random.choice(data))
+    while questions[0] == questions[1]:
+        questions[1] = questions.append(random.choice(data))
 else:
     print("Sorry, that's wrong. Final score: ", score)
