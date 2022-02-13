@@ -9,6 +9,7 @@ def compare(q1,q2):
 def check(q1,q2):
     answer = input("Who has more followers? Type 'A' or 'B': ")
     global score
+    global questions
     more_f = ''
     if answer == "A" or answer == "a":
         answer = 'q1'
@@ -16,8 +17,10 @@ def check(q1,q2):
         answer = 'q2'
     if (q1['follower_count'] > q2['follower_count']):
         more_f = 'q1'
+        del questions[1]
     elif (q1['follower_count'] < q2['follower_count']):
         more_f = 'q2'
+        del questions[0]
     if answer == more_f:
         score += 1
         return False
@@ -32,16 +35,15 @@ score = 0
 
 # print(questions[0])
 # print(questions[0]['name'])
-question1 = random.choice(data)
-question2 = random.choice(data)
+questions = random.choices(data, k=2)
 game_off = False
 while not game_off:
+
     if score > 0:
         print("You're right!. Current score: ", score)
-    compare(question1,question2)
-    game_off = check(question1,question2)
+    compare(questions[0],questions[1])
+    game_off = check(questions[0],questions[1])
     print("\n" * 10)
-    question1 = question2
-    question2 = random.choice(data)
+    questions.append(random.choice(data))
 else:
     print("Sorry, that's wrong. Final score: ", score)
