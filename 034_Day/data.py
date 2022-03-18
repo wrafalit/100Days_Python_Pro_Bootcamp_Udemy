@@ -6,9 +6,31 @@ TYPE = "boolean"
 
 respons = requests.get(url=f"https://opentdb.com/api.php?amount={AMOUNT}&type={TYPE}")
 respons_jons = respons.json()
-print(respons_jons['results'][0])
-print(respons_jons['results'][0]['question'])
-print(respons_jons['results'][0]['correct_answer'])
+# print(respons_jons)
+# print(respons_jons['results'][0])
+# print(respons_jons['results'][0]['question'])
+# print(respons_jons['results'][0]['correct_answer'])
+
+data = {}
+data['text'] = respons_jons['results'][0]['question']
+data["answer"] = respons_jons['results'][0]['correct_answer']
+json_data = json.dumps(data)
+# print(json_data)
+
+
+question_answer = {}
+question_data = []
+for key in respons_jons['results']:
+    # print(key['question'])
+    question_answer['text'] = key['question']
+    question_answer['answer'] = key['correct_answer']
+    question_data.append(question_answer)
+
+
+# print(question_data)
+# question_json_data = json.dumps(question_data)
+# print(question_json_data)
+
 
 # question_data = [
 #     {"text": "A slug's blood is green.", "answer": "True"},
