@@ -1,22 +1,33 @@
+import math
 
+import requests
 
-    ## STEP 1: Use https://www.alphavantage.co/documentation/#daily
+## STEP 1: Use https://www.alphavantage.co/documentation/#daily
 # When stock price increase/decreases by 5% between yesterday and the day before yesterday then print("Get News").
 
+response = requests.get(url="https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=IBM&apikey=demo")
+response.raise_for_status()
+print(response)
+data_IBM = response.json()
+print(data_IBM)
+
 #Get yesterday's closing stock price
-
-
+yester_IBM_close = float(data_IBM["Time Series (Daily)"]["2022-03-22"]["4. close"])
+print(yester_IBM_close)
 
 #Get the day before yesterday's closing stock price
-
+before_yester_IBM_close = float(data_IBM["Time Series (Daily)"]["2022-03-21"]["4. close"])
+print(before_yester_IBM_close)
 
 #Find the positive difference between 1 and 2. e.g. 40 - 20 = -20, but the positive difference is 20. Hint: https://www.w3schools.com/python/ref_func_abs.asp
-
+difference = abs(yester_IBM_close - before_yester_IBM_close)
+print(difference)
 
 #Work out the percentage difference in price between closing price yesterday and closing price the day before yesterday.
+percentage_diff = abs((before_yester_IBM_close / yester_IBM_close) * 100 - 100)
+print(round(percentage_diff, 2))
 
-
-    ## STEP 2: Instead of printing ("Get News"), actually get the first 3 news pieces for the COMPANY_NAME.
+## STEP 2: Instead of printing ("Get News"), actually get the first 3 news pieces for the COMPANY_NAME.
 
 #Instead of printing ("Get News"), use the News API to get articles related to the COMPANY_NAME.
 #If difference percentage is greater than 5 then print("Get News").
