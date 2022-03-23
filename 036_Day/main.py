@@ -1,6 +1,13 @@
 import math
-
+import datetime
 import requests
+
+API = "2422xxx98d69e8"
+COMPANY = "ibm"
+DATE = datetime.datetime.now().date()
+URL = f"https://newsapi.org/v2/everything?q={COMPANY}&from={DATE}&language=en&sortBy=publishedAt&apiKey={API}"
+
+
 
 ## STEP 1: Use https://www.alphavantage.co/documentation/#daily
 # When stock price increase/decreases by 5% between yesterday and the day before yesterday then print("Get News").
@@ -27,10 +34,23 @@ print(difference)
 percentage_diff = abs((before_yester_IBM_close / yester_IBM_close) * 100 - 100)
 print(round(percentage_diff, 2))
 
-## STEP 2: Instead of printing ("Get News"), actually get the first 3 news pieces for the COMPANY_NAME.
-
-#Instead of printing ("Get News"), use the News API to get articles related to the COMPANY_NAME.
 #If difference percentage is greater than 5 then print("Get News").
+if percentage_diff > 5:
+    print("Get News")
+
+## STEP 2: Instead of printing ("Get News"), actually get the first 3 news pieces for the COMPANY_NAME.
+#Instead of printing ("Get News"), use the News API to get articles related to the COMPANY_NAME.
+
+respons_news = requests.get(url=URL)
+respons_news.raise_for_status()
+news_data = respons_news.json()
+
+news_list = []
+for n in range(3):
+    news_list.append(news_data["articles"][n]["title"][:100])
+# print(news_data["articles"][0]["title"][:100])
+print(news_list)
+
 
 
     #Use Python slice operator to create a list that contains the first 3 articles. Hint: https://stackoverflow.com/questions/509211/understanding-slice-notation
