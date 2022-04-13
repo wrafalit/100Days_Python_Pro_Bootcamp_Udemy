@@ -2,7 +2,14 @@ import requests
 from datetime import datetime
 
 # nutritionix
-s://api.sheety.co/2afb7b292d28c56422bb2f510d24b79f/workoutTracking/workouts"
+APP_ID = ""
+API_KEY = ""
+exercise_end_url = ""
+
+# sheety
+TOKEN = ""
+head = {"Authorization" : "Bearer " + TOKEN}
+end_url = ""
 
 def post_exercise(active):
 
